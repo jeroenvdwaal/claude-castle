@@ -1,0 +1,17 @@
+# Local Claude Code state (per-machine settings, personal allowlists)
+.claude/
+
+# Vendored dependency skills pulled in by setup-matt-pocock-skills
+.agents/
+skills-lock.json
+
+# Maintainer-only design vocab (kept local, not shipped)
+CONTEXT.md
+
+# Local issue tracker artifacts (the repo's own bootstrap history)
+issues/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*~

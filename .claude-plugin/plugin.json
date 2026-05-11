@@ -1,0 +1,11 @@
+{
+  "name": "claude-castle",
+  "description": "Structured AI-driven development pipeline for Claude Code. Pack issues into a castle one bucket at a time: /grill-me → /to-prd → /to-issues → /build-castle, with TDD + review + auto-commit per issue. Ships /lay-foundation (repo config) and /build-castle (execution). REQUIRES mattpocock/skills (grill-me, to-prd, to-issues, tdd) installed separately — see README.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Jeroen van der Waal"
+  },
+  "homepage": "https://github.com/jeroenvdwaal/claude-castle",
+  "repository": "https://github.com/jeroenvdwaal/claude-castle",
+  "license": "MIT"
+}
