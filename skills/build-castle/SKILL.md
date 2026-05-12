@@ -35,6 +35,35 @@ Retry counter is per-issue, in-memory only. Starts at `0` when an issue first en
 
 Issues already in `IN_PROGRESS` at start of `/build-castle` (interrupted prior run) skip the `start` event and resume at TDD directly.
 
+## Models
+
+`/build-castle` invokes two subagents per issue: `/tdd` and `/review`. Both are called via the Agent tool with `subagent_type: general-purpose`. The configured model is passed to the Agent tool. The configured level maps to a thinking keyword that is prefixed onto the subagent prompt.
+
+Level → keyword:
+
+| level   | keyword       |
+|---------|---------------|
+| `none`  | *(no prefix)* |
+| `low`   | `think`       |
+| `medium`| `think hard`  |
+| `high`  | `think harder`|
+| `xhigh` | `ultrathink`  |
+
+Valid models: `opus | sonnet | haiku`. Valid levels: `none | low | medium | high | xhigh`.
+
+Per-repo settings live in `docs/agents/build-castle.md` under a `## Models` section with this exact shape:
+
+```markdown
+## Models
+
+| role   | model  | level |
+|--------|--------|-------|
+| tdd    | sonnet | high  |
+| review | opus   | high  |
+```
+
+Exactly two rows are required: `tdd` and `review`.
+
 ## Process
 
 ### 1. Read config
@@ -42,7 +71,14 @@ Issues already in `IN_PROGRESS` at start of `/build-castle` (interrupted prior r
 If either of the two files below is missing, halt immediately with `"Foundation not laid — run /lay-foundation first."` — do not partial-read, do not infer defaults.
 
 - `docs/agents/tracker-adapter.md` — how to invoke tracker verbs (`list-by-status`, `read`, `set-status`, `get-dependency-edges`).
-- `docs/agents/build-castle.md` — `review_retry_budget` setting.
+- `docs/agents/build-castle.md` — `review_retry_budget` setting and `## Models` table.
+
+Read the `## Models` table from `docs/agents/build-castle.md`. Validate strictly:
+
+- Missing table → halt with `"Models table missing in docs/agents/build-castle.md — re-run /lay-foundation or add manually."`
+- Table must contain exactly the roles `tdd` and `review` — one row each. Rows may appear in any order. A duplicate role → halt with `"Duplicate role '<r>' in Models table."` A missing role → halt with `"Missing role '<r>' in Models table. Expected both: tdd, review."`
+- `model` value must be one of `opus | sonnet | haiku`. Otherwise halt with `"Invalid model '<x>' for role '<r>' in build-castle.md. Expected: opus, sonnet, haiku."`
+- `level` value must be one of `none | low | medium | high | xhigh`. Otherwise halt with `"Invalid level '<x>' for role '<r>' in build-castle.md. Expected: none, low, medium, high, xhigh."`
 
 ### 2. Fetch issues
 
@@ -92,12 +128,22 @@ Print header:
 
 #### 5b. Run TDD
 
-Invoke the `/tdd` skill as a subagent, passing the full issue body as context.
-
-Stream step-level output:
+Invoke `/tdd` via the Agent tool: `subagent_type: general-purpose`, `model: <tdd.model>` (from the Models table). Prompt body:
 
 ```
-  ▶ TDD red   — writing failing tests...
+<keyword>
+
+Run the /tdd skill on this issue:
+
+<full issue body>
+```
+
+`<keyword>` is the level→keyword mapping from the `## Models` section. Omit the keyword line entirely if `tdd.level == none`.
+
+Stream step-level output (model + level visible on entry):
+
+```
+  ▶ TDD (<tdd.model>, <tdd.level>) — writing failing tests...
   ✓ TDD green — tests pass
   ✓ TDD refactor — clean
 ```
@@ -113,12 +159,24 @@ Stop all execution.
 
 #### 5c. Run review
 
-Invoke the `/review` skill as a subagent on the changes made during TDD.
+Invoke `/review` via the Agent tool: `subagent_type: general-purpose`, `model: <review.model>` (from the Models table). Prompt body:
+
+```
+<keyword>
+
+Run the /review skill on the changes just made for this issue. Inspect the working-tree diff (`git diff`) to see what was changed.
+
+Issue context:
+
+<full issue body>
+```
+
+`<keyword>` mapped from `review.level` (omit the line if `review.level == none`).
 
 Stream output:
 
 ```
-  ▶ Review...
+  ▶ Review (<review.model>, <review.level>)...
 ```
 
 **On review pass:** continue to 5d.

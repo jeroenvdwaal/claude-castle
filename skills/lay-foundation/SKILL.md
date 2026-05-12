@@ -75,7 +75,7 @@ Show user a draft of:
 
 - The `## Agent skills` block to add to CLAUDE.md / AGENTS.md
 - Contents of `docs/agents/tracker-adapter.md`
-- Contents of `docs/agents/build-castle.md`
+- Contents of `docs/agents/build-castle.md` — must include the seeded `## Models` table (`tdd=sonnet/high`, `review=opus/high`) so the user can object/override before write.
 
 Let them review and request edits before writing.
 
@@ -120,6 +120,7 @@ For "other" trackers, write `docs/agents/tracker-adapter.md` from scratch. Use o
 Tell user setup is complete. Mention:
 
 - They can edit `docs/agents/*.md` directly for minor tweaks — no need to re-run this skill
+- Models for `/tdd` and `/review` subagents are configured in the `## Models` table of `docs/agents/build-castle.md`. Edit that table to retune model or thinking-level per role.
 - Re-run only if switching issue trackers or resetting from scratch
 - Full pipeline: `/grill-me` → `/to-prd` → `/to-issues` → `/build-castle`
 - Dependencies from `mattpocock/skills`: `grill-me`, `to-prd`, `to-issues`, `tdd`

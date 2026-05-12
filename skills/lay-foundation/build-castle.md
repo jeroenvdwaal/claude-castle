@@ -12,6 +12,15 @@ Integer ≥ 0. How many times `/build-castle` passes review findings back to the
 
 Current setting: `0`
 
+## Models
+
+Per-role model + thinking-level for the `/tdd` and `/review` subagents invoked by `/build-castle`. Valid models: `opus | sonnet | haiku`. Valid levels: `none | low | medium | high | xhigh`. The level→thinking-keyword mapping is documented in `skills/build-castle/SKILL.md` (`## Models`).
+
+| role   | model  | level |
+|--------|--------|-------|
+| tdd    | sonnet | high  |
+| review | opus   | high  |
+
 ---
 
 Status vocabulary and transitions live elsewhere:
