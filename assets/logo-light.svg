@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562 302" width="562" height="302" role="img" aria-label="Claude Castle">
+  <defs>
+    <linearGradient id="tileBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBF7F3"/>
+      <stop offset="1" stop-color="#F0E8DF"/>
+    </linearGradient>
+    <linearGradient id="towerFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DA7756"/>
+      <stop offset="1" stop-color="#B8593D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle tile -->
+  <rect x="221" y="20" width="120" height="120" rx="26" ry="26"
+        fill="url(#tileBg)" stroke="#E2D9CE" stroke-width="1"/>
+
+  <!-- Castle tower silhouette: crenellations on top, arched door at base -->
+  <!-- Tower body 56 wide, centered at x=281, top of merlons y=46, base y=124 -->
+  <path fill="url(#towerFill)" d="
+    M 253 60
+    L 253 52
+    L 261 52
+    L 261 46
+    L 269 46
+    L 269 52
+    L 277 52
+    L 277 46
+    L 285 46
+    L 285 52
+    L 293 52
+    L 293 46
+    L 301 46
+    L 301 52
+    L 309 52
+    L 309 60
+    L 309 124
+    L 253 124
+    Z"/>
+
+  <!-- Arched door (cut-out, drawn in tile color) -->
+  <path fill="url(#tileBg)" d="
+    M 273 124
+    L 273 110
+    A 8 8 0 0 1 289 110
+    L 289 124
+    Z"/>
+
+  <!-- Wordmark: CLAUDE CASTLE, slab-serif, heavy -->
+  <text x="281" y="200"
+        text-anchor="middle"
+        font-family="Rockwell, 'Roboto Slab', 'Courier New', serif"
+        font-weight="900"
+        font-size="42"
+        letter-spacing="2"
+        fill="#1A1A1A">CLAUDE CASTLE</text>
+
+  <!-- Tagline -->
+  <text x="281" y="232"
+        text-anchor="middle"
+        font-family="Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+        font-weight="400"
+        font-size="15"
+        letter-spacing="0.3"
+        fill="#6B6B6B">Structured AI-driven development in Claude Code</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562 302" width="562" height="302" role="img" aria-label="Claude Castle">
+  <defs>
+    <linearGradient id="tileBgD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A2520"/>
+      <stop offset="1" stop-color="#1F1B17"/>
+    </linearGradient>
+    <linearGradient id="towerFillD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E89070"/>
+      <stop offset="1" stop-color="#DA7756"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="221" y="20" width="120" height="120" rx="26" ry="26"
+        fill="url(#tileBgD)" stroke="#3A332C" stroke-width="1"/>
+
+  <path fill="url(#towerFillD)" d="
+    M 253 60
+    L 253 52
+    L 261 52
+    L 261 46
+    L 269 46
+    L 269 52
+    L 277 52
+    L 277 46
+    L 285 46
+    L 285 52
+    L 293 52
+    L 293 46
+    L 301 46
+    L 301 52
+    L 309 52
+    L 309 60
+    L 309 124
+    L 253 124
+    Z"/>
+
+  <path fill="url(#tileBgD)" d="
+    M 273 124
+    L 273 110
+    A 8 8 0 0 1 289 110
+    L 289 124
+    Z"/>
+
+  <text x="281" y="200"
+        text-anchor="middle"
+        font-family="Rockwell, 'Roboto Slab', 'Courier New', serif"
+        font-weight="900"
+        font-size="42"
+        letter-spacing="2"
+        fill="#F5EFE8">CLAUDE CASTLE</text>
+
+  <text x="281" y="232"
+        text-anchor="middle"
+        font-family="Inter, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+        font-weight="400"
+        font-size="15"
+        letter-spacing="0.3"
+        fill="#A89F95">Structured AI-driven development in Claude Code</text>
+</svg>
